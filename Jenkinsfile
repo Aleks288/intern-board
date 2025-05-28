@@ -7,5 +7,10 @@ pipeline {
                 sh 'find src -type f -name "*.php" -exec php -l {} \\;'
             }
         }
+        stage('Test') {
+            steps {
+                sh './vendor/bin/phpunit'
+            }
+        }
     }
 }
