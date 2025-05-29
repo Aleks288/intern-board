@@ -10,18 +10,18 @@ pipeline {
         }
 
         stage('Install dependencies') {
-            when {
-                changeRequest()
-            }
+//             when {
+//                 changeRequest()
+//             }
             steps {
                 sh 'composer install --no-interaction'
             }
         }
 
         stage('Test') {
-            when {
-                changeRequest()
-            }
+//             when {
+//                 changeRequest()
+//             }
             steps {
                 sh './vendor/bin/phpunit'
             }
