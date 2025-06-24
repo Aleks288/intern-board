@@ -52,7 +52,11 @@ pipeline {
                     def path = "symfony-builds/${DATE_STRING}-${GIT_AUTHOR}"
                     echo "Archiving and uploading to S3 path: ${path}"
                     sh """
+                    mkdir -p /tmp/build-copy
+                    rsync -a --exclude='.git' ./ /tmp/build-copy/
+                    cd /tmp/build-copy
                         tar --exclude=".git" -czf ${ARCHIVE_NAME} .
+                        rm -rf /tmp/build-copy
                         aws s3 cp ${ARCHIVE_NAME} s3://${S3_BUCKET}/${path}/
                     """
                 }
