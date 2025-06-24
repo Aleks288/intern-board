@@ -54,8 +54,7 @@ pipeline {
                     sh """
                     mkdir -p /tmp/build-copy
                     rsync -a --exclude='.git' ./ /tmp/build-copy/
-                    cd /tmp/build-copy
-                        tar --exclude=".git" -czf ${ARCHIVE_NAME} .
+                        tar --exclude=".git" -czf ${ARCHIVE_NAME} /tmp/build-copy/
                         rm -rf /tmp/build-copy
                         aws s3 cp ${ARCHIVE_NAME} s3://${S3_BUCKET}/${path}/
                     """
